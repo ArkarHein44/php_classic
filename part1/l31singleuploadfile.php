@@ -38,22 +38,154 @@ ini_set('display_errors',1);
 
 
 
-if(isset($_POST['submit'])){
+// if(isset($_POST['submit'])){
     
-    $uploaddir = "assets/";
-    // $uploadfile = $uploaddir.$_FILES['profile']['name']; // assets/ser1.jpg 
-    $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
+//     $uploaddir = "assets/";
+//     // $uploadfile = $uploaddir.$_FILES['profile']['name']; // assets/ser1.jpg 
+//     $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
 
      
-    // move_uploaded_file(temp,actual path and name)
+//     // move_uploaded_file(temp,actual path and name)
 
-    if(move_uploaded_file($_FILES['profile']['tmp_name'],$uploadfile)){
-        echo "File Successfully Uploaded";
+//     if(move_uploaded_file($_FILES['profile']['tmp_name'],$uploadfile)){
+//         echo "File Successfully Uploaded";
+//     }else{
+//         echo "Try Again";
+//     }
+// }
+
+
+// if(isset($_POST['submit'])){
+    
+//     $uploaddir = "var/www/html/phpbatch4/part1/assets/";
+//     $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
+//     $uploadsize = $_FILES['profile']['size'];
+
+//     //  echo $uploadsize;
+
+//     // 60000 bit = 60 kb
+//     if($uploadsize > 60000){
+//         echo "Sorry, Your file is too large";
+//     }else{
+//         // echo "Allowed file size"
+
+//         //move_uploaded_file(temp,actual path and name)
+//         if(move_uploaded_file($_FILES['profile']['tmp_name'],$uploadfile)){
+//             echo "File Successfully Uploaded";
+//         }else{
+//             echo "Try Again";
+//         }
+//     }
+// }
+
+// if(isset($_POST['submit'])){
+    
+//     $uploaddir = "var/www/html/phpbatch4/part1/assets/";
+//     $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
+//     $uploadsize = $_FILES['profile']['size'];
+
+//     //  echo $uploadsize;
+
+//     // 60000 bit = 60 kb
+//     if($uploadtype !== 'jpg' && $uploadtype !== 'jpeg' && $uploadtype !== 'png' && $uploadtype !== 'gif'){
+//         echo "Sorry, we just allowed for JPG,JPEG,PNG & GIF file types";
+//     }else{
+//         // echo "Allowed file size"
+
+//         if($uploadsize > 60000){
+//                     echo "Sorry, Your file is too large";
+//                 }else{
+//                     // echo "Allowed file size"
+            
+//                     //move_uploaded_file(temp,actual path and name)
+//                     if(move_uploaded_file($_FILES['profile']['tmp_name'],$uploadfile)){
+//                         echo "File Successfully Uploaded";
+//                     }else{
+//                         echo "Try Again";
+//                     }
+//                 }
+//     }
+// }
+
+// if(isset($_POST['submit'])){
+    
+//     $uploaddir = "var/www/html/phpbatch4/part1/assets/";
+//     $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
+//     $uploadsize = $_FILES['profile']['size'];
+// $uploadtype = strtolower(pathinfo($uploadfile,PATHINFO_EXTENSION));
+    // $ready= true;
+
+//     //  echo $uploadsize;
+//     // echo $uploadtype;
+
+//     // check file already exists or not
+//     if(file_exists($uploadfile)){
+//         echo "Sorry, file already exiss. <br/>";
+//         $ready = false;
+//     }
+
+//     // check file size
+//     if($uploadsize > 60000){
+//         echo "Sorry, Your file is too large. <br/>";
+//         $ready = false;
+//     }
+
+//     // check file formats
+//     if($uploadtype !== 'jpg' && $uploadtype !== 'jpeg' && $uploadtype !== 'png' && $uploadtype !== 'gif'){
+//     echo "Sorry, we just allowed for JPG,JPEG,PNG & GIF file types";
+//     $ready = false;
+//     }
+
+//     // upload
+//     if($ready){
+//         if(move_uploaded_file($_FILES['profile']['tmp_name'],$uploadfile)){
+//             echo "File Successfully Uploaded";
+//         }else{
+//             echo "Try Again";
+//         }
+//     }
+// }
+
+if(isset($_POST['submit'])){
+    
+    $uploaddir = "var/www/html/phpbatch4/part1/assets/";
+    $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
+    $uploadsize = $_FILES['profile']['size'];
+    $uploadtype = strtolower(pathinfo($uploadfile,PATHINFO_EXTENSION));
+    $ready= true;
+    $allowextensions = ["jpg",'jpeg','png','gif'];
+    $errors = [];
+
+    //  echo $uploadsize;
+    // echo $uploadtype;
+
+    // check file already exists or not
+    if(file_exists($uploadfile)){
+        $errors[] = "Sorry, file already exiss. <br/>";
+    }
+
+    // check file size
+    if($uploadsize > 60000){
+        $errors[] =  "Sorry, Your file is too large. <br/>";
+
+    }
+
+    // check file formats
+    if(in_array($uploadtype,$allowextensions) === false){
+    $errors[] = "Sorry, we just allowed for JPG,JPEG,PNG & GIF file types";
+    }
+
+    // upload
+    if(empty($errors) === true){
+        if(move_uploaded_file($_FILES['profile']['tmp_name'],$uploadfile)){
+            echo "File Successfully Uploaded";
+        }else{
+            $errors[] =  "Try Again";
+        }
     }else{
-        echo "Try Again";
+        echo "<pre>".print_r($errors,true)."</pre>";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
