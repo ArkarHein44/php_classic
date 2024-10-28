@@ -1,0 +1,111 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+    height: 100vh;
+    background-color: #888;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    width: 600px;
+    background-color: #fff;
+    box-shadow: 0 10px 5px rgba(0,0,0,0.5);
+
+    display: flex;
+}
+
+.dotbox{
+    width: 10%;
+}
+
+.dot{
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: #bbb;
+
+    border-radius: 50%;
+    opacity: .5;
+
+    margin: 10px auto;
+}
+
+.dot.active{
+    opacity: 1;
+}
+
+.dot.done{
+    background-color: green;
+}
+
+#form{
+    width: 90%;
+    border-left: 2px solid #eee;
+
+    padding: 5ch;
+}
+
+h1{
+    text-align: center;
+}
+
+input{
+    width: 100%;
+    font-size: 20px;
+    border: 1px solid #ccc;
+
+    padding: 10px;
+    margin: 10px;
+}
+
+input:focus{
+    outline: none;
+}
+
+.form-check-input{
+    width: auto;
+    display: inline;
+
+}
+
+.d-flex{
+    display: flex;
+    justify-content: end;
+}
+
+.btn, .submit-btn{
+    background-color: steelblue;
+    color: #fff;
+    border: none;
+    outline-color: none;
+    font-size: 20px;
+
+    padding: 10px 20px;
+    margin-left: 20px;
+    cursor: pointer;
+
+}
+
+.btn:hover{
+    opacity: .8;
+}
+#prevbtn{
+    background-color: #bbb;
+}
+
+#result-container{
+    list-style-type: none;
+    padding: 3px;
+}
+
+.submit-btn{
+    width: 100%;
+    padding: 5px 0;
+    margin-left: 0;
+}
