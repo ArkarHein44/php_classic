@@ -44,6 +44,10 @@ body{
     background-color: green;
 }
 
+.dot.error{
+    background-color: red;
+}
+
 #form{
     width: 90%;
     border-left: 2px solid #eee;
@@ -95,6 +99,7 @@ input:focus{
 .btn:hover{
     opacity: .8;
 }
+
 #prevbtn{
     background-color: #bbb;
 }

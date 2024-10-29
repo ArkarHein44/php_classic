@@ -7,8 +7,9 @@ $dbuser = "root";
 $dbpass = "";
 $dbname = "";
 
-try(){
-    $conn = new PDO("mysql:host=$dbhost;dbname=$dbhost;dbuser=$dbuser;$dbpass");
-}catch(){
-
+try{
+    $conn = new PDO("mysql:host=$dbhost;dbname=$dbname;$dbuser;$dbpass");
+}catch(PDOException $e){
+    echo "Error Found : ". $e->getMessage();
 }
+

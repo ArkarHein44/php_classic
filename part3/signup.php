@@ -15,7 +15,7 @@
         </div>
 
         <div class="">
-            <h1 class="">Login With Us</h1>
+            <h1 class="">Register With Us</h1>
             <form action="registerfunction.php" method="post" class="" id="form" enctype="multipart/form-data">
 
                 <div class="page">
@@ -27,8 +27,8 @@
                         <div class="">
                             <input type="radio" name="newsletter" id="agree" class="form-check-input" value="1" checked/> 
                             <label for="agree" class="form-check-label">I agree to get newsletter.</label>
-
-                            <input type="radio" name="newsletter" id="noagree" class="form-check-input" value="0" checked/> 
+                            <br/>
+                            <input type="radio" name="newsletter" id="noagree" class="form-check-input" value="0" /> 
                             <label for="noagree" class="form-check-label">I do not agree to get newsletter.</label>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                 </div>
             </form>
 
-            <p>Already registert? <a href="signup.php">Login here !!!</a></p>
+            <p>Already registert? <a href="signin.php">Login here !!!</a></p>
             <div id="result-container">
                 <!-- <ul>
                     <li>Name: Aung Kyaw</li>
