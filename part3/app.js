@@ -7,7 +7,7 @@ var getpages = document.getElementsByClassName('page');
 var getform = document.getElementById('form');
 var getprevbtn = document.getElementById('prevbtn');
 var getnextbtn = document.getElementById('nextbtn');
-var getsesultcontainer = document.getElementById('result-container');
+var getresultcontainer = document.getElementById('result-container');
 var objkeys = ["email","password","firstname","lastname","dob","phone","address"];
 var datas = [{
 }]
@@ -45,18 +45,36 @@ function gonow(num){
     // console.log(num); // 1
     // console.log(curridx); // 0
 
-    getpages[curridx].style.display = "none";
-    curridx = curridx+num;
+    // getpages[curridx].style.display = "none";
+    // curridx = curridx+num;
 
     // console.log(curridx);
 
-    if(curridx >= getpages.length){
-        getform.onsubmit();
+    // if(curridx >= getpages.length){
+    //     getform.onsubmit();
+    // }
+
+    // showpage(curridx);
+
+    // formvalidation();
+
+    if(formvalidation()){
+        getpages[curridx].style.display = "none";
+        curridx = curridx+num;
+
+        if(curridx >= getpages.length){
+            // getform.onsubmit();
+
+            getform.style.display = "none";
+            getresultcontainer.style.display = "block";
+
+            result(datas);
+        }
+
+        showpage(curridx);
     }
 
-    showpage(curridx);
 
-    formvalidation();
 
 }
 
@@ -77,7 +95,7 @@ let gen = genfun();
 function formvalidation(){
     var valid = true;
 
-    var getcurrentinput = getpages[curridx].getElementsByTagName('input');
+    var getcurrentinput = getpages[curridx].querySelectorAll('.form-control');
 
     // console.log(getcurrentinput);
     // console.log(getcurrentinput[2].value);
@@ -129,4 +147,22 @@ function formvalidation(){
     }
 
     // console.log(valid);
+    return valid;
+}
+
+function result(data){
+
+    console.log(data);
+
+    getresultcontainer.innerHTML = `
+        <ul>
+            <li>Name : ${data[2].firstname} ${data[3].lastname}<li>
+            <li>Email : ${data[0].email}<li>
+            <li>Date Of Birth : ${data[4].dob} <li>
+            <li>Phone Number : ${data[5].phone} <li>
+            <li>Address : ${data[6].address} <li>
+        </ul>
+
+        <button type="submit" class="submit-btn" onclick="submitbtn()">Apply Now</button>
+    `
 }

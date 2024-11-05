@@ -83,7 +83,8 @@ input:focus{
     justify-content: end;
 }
 
-.btn, .submit-btn{
+.btn{
+    width: 100%;
     background-color: steelblue;
     color: #fff;
     border: none;
@@ -91,9 +92,21 @@ input:focus{
     font-size: 20px;
 
     padding: 10px 20px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     cursor: pointer;
+}
 
+.submit-btn{
+    width: 100%;
+    background-color: steelblue;
+    color: #fff;
+    border: none;
+    outline-color: none;
+    font-size: 20px;
+
+    padding: 5px 0;
+    /* margin-left: 20px; */
+    cursor: pointer;
 }
 
 .btn:hover{
@@ -104,7 +117,12 @@ input:focus{
     background-color: #bbb;
 }
 
-#result-container{
+/* #result-container{
+    display: ;
+
+} */
+
+#result-container ul li{
     list-style-type: none;
     padding: 3px;
 }
