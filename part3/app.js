@@ -1,168 +1,186 @@
-// UI
-var getdots = document.getElementsByClassName('dot');
-var getpages = document.getElementsByClassName('page');
+//UI 
 
-//console.log(getdots);
+var getdots = document.getElementsByClassName('dot');   //htmlCollection
+var getpages = document.getElementsByClassName("page");  
+// console.log(getpages) 
+var getform = document.getElementById("form"); 
+var getprevbtn = document.getElementById("prevbtn");
+var getnextbtn = document.getElementById("nextbtn");
+var getresultcontainer = document.getElementById("result-container");
+var pagekeys = [
+    ['email',"password","newsletter","newsletter"], // Page 1 : Security
+    ["firstname","lastname","profile"],                       // Page 2 : Personal Info
+    ["dob"],                                        // Page 3 : Date Of Birth
+    ["phone","address","documents","documents"]     // Page 4 : Contact Info
+]; 
 
-var getform = document.getElementById('form');
-var getprevbtn = document.getElementById('prevbtn');
-var getnextbtn = document.getElementById('nextbtn');
-var getresultcontainer = document.getElementById('result-container');
-var objkeys = ["email","password","firstname","lastname","dob","phone","address"];
-var datas = [{
-}]
+var datas = [];
 
-let curridx = 0;
+let curridx = 0; 
 
-showpage(curridx);
+showpage(curridx); 
 
-// 0 1 2 3
-// 1 2 3 4
+//currentidx  0 1 2 3
+//gonow or next  1 2 3 4 
 
 function showpage(num){
-    // console.log(num);
+    // console.log(num);  
+    // getpages[num].style.display = "block"; 
 
-    getpages[num].style.display = "block";
+    const pages = document.querySelectorAll('.page');
+    pages.forEach((page,index)=>{
+        page.style.display = index === num ? "block" : "none";
+    })
 
-    num === 0 ? getprevbtn.style.display = "none" : getprevbtn.style.display = "inline-block";
+    num === 0 ? getprevbtn.style.display  = "none" : getprevbtn.style.display = "inline-block"  
 
-    num === (getpages.length-1) ? getnextbtn.textContent = "Submit" : getnextbtn.textContent = "Next";
+    num === (getpages.length-1) ? getnextbtn.textContent = "Submit" : getnextbtn.textContent = "Next"
 
     dotindicator(num);
 }
-
+ 
 function dotindicator(num){
-    // console.log(num);
+    // console.log(num);  
 
-    for(var x =0; x < getdots.length; x++){
+    for(var x = 0; x < getdots.length; x++){
         getdots[x].classList.remove('active');
     }
 
-    getdots[num].className += " active";
+    getdots[num].className += ' active'
 }
 
 function gonow(num){
-    // console.log(num); // 1
-    // console.log(curridx); // 0
+
+    // console.log(num);  // 1 mean page 2
+    // // console.log(` ${curridx}`); //0 
 
     // getpages[curridx].style.display = "none";
-    // curridx = curridx+num;
-
-    // console.log(curridx);
+    // curridx = curridx+num;  
+    // console.log(`current ${curridx}`); //1 
 
     // if(curridx >= getpages.length){
-    //     getform.onsubmit();
+    //     getform.submit();
     // }
-
-    // showpage(curridx);
-
-    // formvalidation();
+    // showpage(curridx); 
+    // console.log(formvalidation())
 
     if(formvalidation()){
-        getpages[curridx].style.display = "none";
-        curridx = curridx+num;
+        getpages[curridx].style.display = 'none'; 
+        curridx = curridx+num; 
 
         if(curridx >= getpages.length){
-            // getform.onsubmit();
-
-            getform.style.display = "none";
+            // getform.submit();
+            getform.style.display = "none"; 
             getresultcontainer.style.display = "block";
 
             result(datas);
         }
 
         showpage(curridx);
+        
+        
+        
     }
+    
+} 
 
-
-
-}
-
-function* genfun(){
-    var index = 0;
-            // 0 <7
-    while(index < objkeys.length){
-        yield index++;
-    }
-}
-
-// console.log(genfun().next().value);
-
-let gen = genfun();
-// console.log(gen.next().value); // 0
-// console.log(gen.next().value); // 1
 
 function formvalidation(){
-    var valid = true;
+    var valid = true; 
 
-    var getcurrentinput = getpages[curridx].querySelectorAll('.form-control');
-
+    var getcurrentinput = getpages[curridx].getElementsByTagName('input');
     // console.log(getcurrentinput);
-    // console.log(getcurrentinput[2].value);
+    // console.log(getcurrentinput[0].value);
 
-    for(var x = 0; x < getcurrentinput.length; x++){
-        // console.log(getcurrentinput[x].value;
+    // datas = [
+    //             [{
+    //                 email:"root@gmail.com";
+    //                 password:"012345",
+    //                 newsletter:1
+    //             }],
+    //             [{
+    //                 firstname:"aung",
+    //                 lastname:"kyaw"
+    //             }]
+    //         ]
 
-        if((getcurrentinput[x].value).trim() === ''){
-            getcurrentinput[x].classList.add('error');
-            valid = false;
-        }else{
-            // console.log('x value is = ',x);
-            // console.log(objkeys[x]);
-            // console.log(getcurrentinput[x].value);
+    // datas[0][newsletter] = 1
 
-            // console.log("gen value is = ", gen.next().value);
-
-            // Method 1
-            // const keys = objkeys[gen.next().value];
-            // console.log(keys);
-            // const values = getcurrentinput[x].value;
-            // console.log(values);
-            // const obj = {
-            //     [keys]:values
-            // };
-            // datas.push(obj);
-
-            // Method 2
-            // const keys = objkeys[gen.next().value];
-            // console.log(keys);
-            // const values = getcurrentinput[x].value;
-            // console.log(values);
-            // var obj = {};
-            // obj[keys] = values
-            // datas.push(obj);
-           
-            // Method 3
-            const keys = objkeys[gen.next().value];
-            const values = getcurrentinput[x].value;
-            datas.push({[keys]:values});
-
-        }
+    if(!datas[curridx]){
+        datas[curridx] = {};
     }
 
-    // console.log(datas);
-    
+    let currpagekeys = pagekeys[curridx];
+
+    for(var x=0; x < getcurrentinput.length; x++){
+        // console.log(getcurrentinput[x].value);  
+
+        let input = getcurrentinput;
+        let key = currpagekeys[x];
+
+        if(input.type === "radio"){
+
+            if(input.checked){
+                datas[curridx][key] = input.value;
+            }
+
+        }else if(input.type === "checkbox"){
+            if(!datas[curridx][key]){
+                datas[curridx][key] = [];
+            }
+
+            if(input.checked){
+               datas[curridx][key].push(input.value); 
+            }
+            
+            
+        }else if((input.value).trim() === ''){
+            input.classList.add('error');
+            valid = "false";
+        }else{
+            input.classList.remove('error');
+            datas[curridx][[key]] = input.value;
+        }
+        
+      
+
+        // console.log(datas);
+    } 
+
     if(valid){
-        getdots[curridx].className += " done";
+        getdots[curridx].className += " done"; 
     }
 
     // console.log(valid);
     return valid;
-}
+} 
 
 function result(data){
+    // console.log(data);
 
-    console.log(data);
+    const documentlist = data[3].documents.length > 0 ? data[3].documents.join(',') : "No Data";
 
     getresultcontainer.innerHTML = `
-        <ul>
-            <li>Name : ${data[2].firstname} ${data[3].lastname}<li>
-            <li>Email : ${data[0].email}<li>
-            <li>Date Of Birth : ${data[4].dob} <li>
-            <li>Phone Number : ${data[5].phone} <li>
-            <li>Address : ${data[6].address} <li>
-        </ul>
+    <ul>
+        <li>Name : ${data[1].firstname} ${data[3].lastname}</li>
+        <li>Agree : ${data[1].newsletter === '1' ? 'Yes' : "No"}</li>
+        <li>Email :${data[0].email}</li>
+        <li>Profile :${data[1].profile}</li>
+        <li>Date of Birth: ${data[2].dob}</li>
+        <li>Phone number: ${data[3].phone}</li>
+        <li>Address: ${data[3].address}</li>
+        <li>Documents: ${documentlist}</li>
+    </ul>
+    <button type="submit" class="submit-btn" onclick="submitbtn()" >Apply Now</button> 
 
-        <button type="submit" class="submit-btn" onclick="submitbtn()">Apply Now</button>
-    `
+    `;
+} 
+
+function submitbtn(){
+    getform.submit(); 
 }
+
+
+
+
+

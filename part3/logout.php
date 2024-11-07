@@ -1,19 +1,25 @@
 <?php
 
-include_once "sessionconfig.php";
+// session_destroy(); 
 
-// session_destroy();
-
-// unset($_SESSION['email']);
-// unset($_SESSION['password']);
+// unset($_SESSION['email']); 
+// unset($_SESSION['password']);  
 
 // if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
-//     header("location:signin.php");
-// }
+//     header('Location:signin.php'); 
+// } 
+
+
+
+include_once "sessionconfig.php"; 
 
 unsetsession('email');
 unsetsession('password');
-
+ 
 if(authfailed()){
-    redirectto('signin.php');
+    redirectto('signin.php'); 
 }
+
+
+
+?>

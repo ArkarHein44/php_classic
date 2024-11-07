@@ -6,7 +6,6 @@ body{
     font-family: sans-serif;
     height: 100vh;
     background-color: #888;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +15,6 @@ body{
     width: 600px;
     background-color: #fff;
     box-shadow: 0 10px 5px rgba(0,0,0,0.5);
-
     display: flex;
 }
 
@@ -29,7 +27,6 @@ body{
     width: 15px;
     height: 15px;
     background-color: #bbb;
-
     border-radius: 50%;
     opacity: .5;
 
@@ -46,9 +43,13 @@ body{
 
 #form{
     width: 90%;
-    border-left: 2px solid #eee;
+    /* border-left: 2px solid #eee; */
 
-    padding: 5ch;
+    padding: 50px;
+}
+
+.formcontainer{
+    border-left: 2px solid #eee;
 }
 
 h1{
@@ -61,17 +62,20 @@ input{
     border: 1px solid #ccc;
 
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 input:focus{
     outline: none;
 }
 
+input.error{
+    border: 1px dotted red;
+}
+
 .form-check-input{
     width: auto;
     display: inline;
-
 }
 
 .d-flex{

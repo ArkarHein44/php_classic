@@ -1,15 +1,16 @@
 <?php
-session_start();
 
-function setsession($key, $val){
+session_start(); 
+
+function setsession($key,$val){
     $_SESSION[$key] = $val;
 }
 
 function getsession($key){
     return $_SESSION[$key];
-}
+} 
 
-function verifysession($key){
+function verifysession(){
     return isset($_SESSION[$key]);
 }
 
@@ -17,16 +18,18 @@ function unsetsession($key){
     unset($_SESSION[$key]);
 }
 
-function destoryallsession(){
+function destroyallsession(){
     session_destroy();
-}
+} 
 
 function authfailed(){
     if(!isset($_SESSION['email']) && !isset($_SESSION['password'])){
-        return true;
+        return true; 
     }
-}
+} 
 
 function redirectto($url){
-    header("Location:$url");
+    header("Location:$url"); 
 }
+
+?>
