@@ -94,7 +94,7 @@
 
 
             <div id="result-container"> 
-                <p>Already register? <a href="signup.php">Sign here!!</a> </p>
+                <p>Already register? <a href="signin.php">Sign here!!</a> </p>
                 <!-- <ul>
                     <li>Name : Aung Kyaw</li>
                     <li>Email : aungkyaw@gamil.com</li>
@@ -108,3 +108,4 @@
     <script src="app.js" type="text/javascript"></script>
 </body>
 </html>
+

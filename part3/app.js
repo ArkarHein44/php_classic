@@ -62,26 +62,40 @@ function gonow(num){
     //     getform.submit();
     // }
     // showpage(curridx); 
-    // console.log(formvalidation())
+    // console.log(formvalidation());
 
-    if(formvalidation()){
+    // if(num == 1 && formvalidation()){
+    //     getpages[curridx].style.display = 'none'; 
+    //     curridx = curridx+num; 
+
+    //     if(curridx >= getpages.length){
+    //         // getform.submit();
+    //         getform.style.display = "none"; 
+    //         getresultcontainer.style.display = "block";
+
+    //         result(datas);
+
+    //         return false;
+    //     }
+
+    //     showpage(curridx);          
+    // }
+
+    if(num == 1 && !formvalidation()) return false;
         getpages[curridx].style.display = 'none'; 
         curridx = curridx+num; 
 
-        if(curridx >= getpages.length){
-            // getform.submit();
-            getform.style.display = "none"; 
-            getresultcontainer.style.display = "block";
+    if(curridx >= getpages.length){
+        // getform.submit();
+        getform.style.display = "none"; 
+        getresultcontainer.style.display = "block";
 
-            result(datas);
-        }
+        result(datas);
 
-        showpage(curridx);
-        
-        
-        
+        return false;
     }
-    
+
+    showpage(curridx);      
 } 
 
 
