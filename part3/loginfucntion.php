@@ -9,10 +9,10 @@ require_once('sessionconfig.php');
 
 if($_SERVER['REQUEST_METHOD']==="POST"){
     $getemail = textfilter($_POST['email']);
-    $getpassword = textfilter($_POST['password']);
+    $getpassword = md5(textfilter($_POST['password']));
 
-    echo $getemail;
-    echo $getpassword;
+    // echo $getemail;
+    // echo $getpassword;
 
     if($getemail && $getpassword){
         loginverify($getemail, $getpassword);
@@ -29,21 +29,44 @@ function textfilter($data){
     return $data;
 }
 
-function loginverify($getemail, $getpassword){
-    // try{
-    //     $stmt-$conn->prepare("SELECT email,password FROM users WHERE email=:email AND password=:password");
+function loginverify($email, $password){
+    try{
+        $conn = $GLOBALS['conn'];
+        $stmt = $conn->prepare("SELECT email,password FROM users WHERE email=:email AND password=:password");
      
-    //     $stmt->bindParam(":emil",$bindemail);
-    //     $stmt->bindParam(":password",$bindpassword);
+        $stmt->bindParam(":emil",$bindemail);
+        $stmt->bindParam(":password",$bindpassword);
 
-    //     $bindemail = $email;
-    //     $bindpassword = $password;
+        $bindemail = $email;
+        $bindpassword = $password;
 
-    //     $stmt->execute();
+        $stmt->execute();
 
-    // }catch(PDOException $e){
-    //     echo "Error Found : ". $e->getMessage();
-    // }
+        $stmt->rowCount()."<br/>";
+
+        // formatprint($stmt->fetch()); // result 1 from first row
+        // formatprint($stmt->fetch(PDO::FETCH_ASSOC));
+        // formatprint($stmt->fetch(PDO::FETCH_OBJ));
+        // formatprint($stmt->fetchAll()); // all results
+        // formatprint($stmt->fetchAll(PDO::FETCH_OBJ)); // all results
+
+        if($stmt->rowCount()== 0){
+            echo "No data";
+
+            redirectto('signin.php');
+        }else{
+            echo "Has Data";
+
+            setsession('email',$bindemail);
+            setsession('password',$bindpassword);
+
+            redirectto('index.php');
+        }
+    }catch(PDOException $e){
+        echo "Error Found : ". $e->getMessage();
+    }
+
+    
 }
 ?>
 <!-- 

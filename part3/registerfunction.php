@@ -11,7 +11,7 @@ if($_SERVER('REQUEST_METHOD')==="POST"){
     $getfirstname = textfilter($_POST['firstname']);
     $getlastname = textfilter($_POST['lastname']);
     $getemail = textfilter($_POST['email']);
-    $getpassword = textfilter($_POST['password']);
+    $getpassword = md5(textfilter($_POST['password']));
     $getdob = textfilter($_POST['dob']);
     $getphone = textfilter($_POST['phone']);
     $getaddress = textfilter($_POST['address']);
@@ -30,7 +30,7 @@ if($_SERVER('REQUEST_METHOD')==="POST"){
 
     if($getemail && $getpassword){
         try{
-            $stmt - $conn->prepare("INSERT INTO users(:profile,:firstname,:lastname,:emil,:password,:dob,:phone,:address,:newsletter");
+            // $stmt = $conn->prepare("INSERT INTO users(:profile,:firstname,:lastname,:emil,:password,:dob,:phone,:address,:newsletter") VALUE (:profile,:firstname,:lastname,:email,:password,:dob,:);
             $stmt->bindParam(":profile",$bindprofile);
             $stmt->bindParam(":firstname",$bindfirstname);
             $stmt->bindParam(":lastname",$bindlastname);
@@ -42,8 +42,60 @@ if($_SERVER('REQUEST_METHOD')==="POST"){
             $stmt->bindParam(":newsletter",$bindnewsletter);
 
             // handle profile 
-
+            $countfiles = count($_FILES['profile']['name']);
             
+            if($countfiles){
+                for($x = 0; $x < $countfiles; $x++){
+                    $uploaddir = "assets/";
+                    $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
+                    $uploadsize = $_FILES['profile']['size'];
+                    $uploadtype = strtolower(pathinfo($uploadfile,PATHINFO_EXTENSION));
+                    $ready= true;
+                    $allowextensions = ["jpg",'jpeg','png','gif'];
+                    $errors = [];
+
+                    // echo $uploadsize;
+                    // echo $uploadtype;
+
+                    // check file already exists or not
+                    if(file_exists($uploadfile)){
+                        $errors[] = "Sorry, file already exiss. <br/>";
+                    }
+
+                    // check file size
+                    if($uploadsize > 60000){
+                        $errors[] =  "Sorry, Your file is too large. <br/>";
+
+                    }
+
+                    // check file formats
+                    if(in_array($uploadtype,$allowextensions) === false){
+                    $errors[] = "Sorry, we just allowed for JPG,JPEG,PNG & GIF file types";
+                    }
+
+                    // upload
+                    if(empty($errors) === true){
+                        if(move_uploaded_file($_FILES['profile']['tmp_name'],$uploadfile)){
+                            $profile = $uploadfile;
+                            echo "File Successfully Uploaded";
+                        }else{
+                            echo "Try Again";
+                        }
+                    }else{
+                        echo "<pre>".print_r($errors,true)."</pre>";
+                    }
+                    
+                    // check extension
+
+
+                    // check size
+
+                    // upload
+
+
+                }
+            }
+
             $bindprofile = $getprofile;
             $bindfirstname = $getlastname;
             $bindlastname = $getlastname;
@@ -53,6 +105,18 @@ if($_SERVER('REQUEST_METHOD')==="POST"){
             $bindphone = $getphone;
             $bindaddress = $getaddress;
             $bindnewsletter = $getnewsletter;
+
+            $getdocuments = NULL;
+
+            if(isset($POST['documents'])){
+                $docs = $_POST['documents'];
+
+                foreach($docs as $doc){
+                    $getdocuments += $doc.",";
+                }
+            }
+
+            $binddocuments = $getdocuments;
 
             // $stmt->execute();
 
