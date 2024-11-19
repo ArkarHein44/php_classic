@@ -6,6 +6,10 @@ ini_set('display_errors',1);
 require_once('dbconnect.php');
 require_once('sessionconfig.php');
 
+if(authfailed()){
+    redirectto('signin.php');
+}
+
 try{
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("SELECT id,profile,firstname,lastname,email,dob,phone,address FROM users");

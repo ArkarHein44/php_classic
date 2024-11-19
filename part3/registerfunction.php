@@ -18,15 +18,15 @@ if($_SERVER('REQUEST_METHOD')==="POST"){
     // $getdocuments = textfilter($_POST['documents']);
     $getnewsletter = textfilter($_POST['newsletter']);
 
-    echo $getfirstname;
-    echo $getlastname;
-    echo $getemail;
-    echo $getpassword;
-    echo $getdob;
-    echo $getphone;
-    echo $getaddress;
+    // echo $getfirstname;
+    // echo $getlastname;
+    // echo $getemail;
+    // echo $getpassword;
+    // echo $getdob;
+    // echo $getphone;
+    // echo $getaddress;
     // echo $getdocuments;
-    echo $getnewsletter;
+    // echo $getnewsletter;
 
     if($getemail && $getpassword){
         try{
@@ -46,21 +46,21 @@ if($_SERVER('REQUEST_METHOD')==="POST"){
             
             if($countfiles){
                 for($x = 0; $x < $countfiles; $x++){
-                    $uploaddir = "assets/";
-                    $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
+
+                    $getuniqid = uniqid().'_'.time();
+                    $uploaddir = "./public/assets/";
+                    // $uploadfile = $uploaddir.basename($_FILES['profile']['name']); // assets/ser1.jpg 
+
+                    $getextension = pathinfo($_FILES['profile']['name'][$x], PATHINFO_EXTENSION);
+                    $newfilename = $getuniqid.".".basename($getextension);
+                    $uploadfile = $uploaddir.basename($newfilename);
                     $uploadsize = $_FILES['profile']['size'];
                     $uploadtype = strtolower(pathinfo($uploadfile,PATHINFO_EXTENSION));
-                    $ready= true;
                     $allowextensions = ["jpg",'jpeg','png','gif'];
                     $errors = [];
 
                     // echo $uploadsize;
                     // echo $uploadtype;
-
-                    // check file already exists or not
-                    if(file_exists($uploadfile)){
-                        $errors[] = "Sorry, file already exiss. <br/>";
-                    }
 
                     // check file size
                     if($uploadsize > 60000){
@@ -112,7 +112,7 @@ if($_SERVER('REQUEST_METHOD')==="POST"){
                 $docs = $_POST['documents'];
 
                 foreach($docs as $doc){
-                    $getdocuments += $doc.",";
+                    $getdocuments .= $doc.",";
                 }
             }
 
@@ -126,7 +126,8 @@ if($_SERVER('REQUEST_METHOD')==="POST"){
                 setsession('password',$bindpassword);
 
                 // redirect to profile or webpage
-                redirectto('https://google.com');
+                // redirectto('https://google.com');
+                redirectto('public/plancohomedecoration/index.php');
             }else{
                 echo "Try Again";
             }
@@ -161,7 +162,8 @@ CREATE TABLE IF NOT EXISTS users(
     dob DATE,
     phone VARCHAR(13),
     address VARCHAR(100),
-    documnets VARCHAR(100)
+    documnets VARCHAR(100),
+    newsletter TINYINT(1)
 );
 
 DESC users; 

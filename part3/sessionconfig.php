@@ -10,7 +10,7 @@ function getsession($key){
     return $_SESSION[$key];
 } 
 
-function verifysession(){
+function verifysession($key){
     return isset($_SESSION[$key]);
 }
 
