@@ -1,0 +1,36 @@
+=> MVC Framework ( Model, View, Controller )
+
+=> Model
+it's work with database (SELECT, INSERT, UPDATE, DELETE)
+communicate with the Controller (when Controller request or a data to modal ! model supplies that).
+Model သည် database အား CRUD ပြုလုပ်ရန်သုံးပါသည်။ Controller မှ data modal သို့ requestလုပ်သည့်အခါ model မှ Controller ချိတ်ဆက်ကာ လုပ်ဆောင်ပေးပါသည်။
+
+=> View
+A View is that part of the application that represents the presentation of data HTML, CSS codes for end user see.
+view သည် HTML CSS codeများအား end user သို့ ဖော်ပြပေးရန် သုံးပါသည်။
+
+=> Controller
+The Controller receives input from the end user, process the request (GET, POST, PUT, DELETE) 
+Note: The Controller mediates between the models and views.
+Controller သည် end user ထံမှ input များအား လက်ခံပြီး client အား service ပေးရန် လုပ်ဆောင်ပါသည်။ Controller သည် model နှင့် view အား ချိတ်ဆက်ကာ ကြားခံဆောင်ရွက်ပါသည်။
+
+----------------------------------------------------------------
+
+=> Routing
+
+https://example.com
+https://example.com/roles/index.php
+https://example.com/roles/1/edit.php
+https://example.com/roles/show/1.php
+
+Base URL = https://example.com
+Absolute URL = https://example.com/roles/index.php
+Relative URL
+    (i) Prefix URL = https://example.com/roles/
+    (ii) Entry-Specific URL = https://example.com/roles/show/1.php
+
+example route = roles/show/1.php
+roles defined as CLASS
+show defined as Method
+1 defined as Parameter
+
