@@ -18,7 +18,7 @@ class SystemController{
         // $this->model('Article);
 
         if(file_exists('../app/models/'.$model.'.php')){
-            echo "View file exists";
+            echo "Model file exists";
             require_once '../app/models/'.$model.'.php';
             return new $model();
         }else{

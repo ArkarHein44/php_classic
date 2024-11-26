@@ -1,4 +1,7 @@
 <?php
+
+echo "config file is working <br/>";
+
 // App Name 
 define('APPNAME','PHP OOP Project');
 
