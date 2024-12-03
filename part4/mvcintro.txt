@@ -34,3 +34,16 @@ roles defined as CLASS
 show defined as Method
 1 defined as Parameter
 
+=>For Linux
+sudo service apache2 stop
+sudo service apache2 start
+sudo service apache2 restart
+
+=>For Linux (Apache Edit for rewrite)
+sudo a2enmod rewrite
+sudo nano /etc/apache2/sites-enabled-000-default.conf
+
+=add these lines to the end
+<Directory /var/www/html>
+    AllowOverride All 
+<Directory>
