@@ -1,36 +1,23 @@
 <?php
 
-echo "config file is working <br/>";
 
-// App Name 
-define('APPNAME','PHP OOP Project');
 
-// Root URL 
-define('URL ROOT','http://localhost/php_classic/part4');
+// App Name
+define('APPNAME', 'PHP OOP Project');
 
-// App URL 
+// Root URL
+define('URLROOT', 'http://localhost/dltphpbatch4/part4');
 
-// current dir 
-// echo __FILE__;  
-// C:\xampp\htdocs\php_classic\part4\app\config\config.php
-
-// current folder 
-// echo dirname(__FILE__);
-// C:\xampp\htdocs\php_classic\part4\app\config
-
-// parent folder of current folder
-// echo dirname(dirname(__FILE__));
-// C:\xampp\htdocs\php_classic\part4\app
-
+// app URL
+// echo __FILE__; // /Applications/XAMPP/xamppfiles/htdocs/dltphpbatch4/part4/app/config/config.php
+// echo dirname(__FILE__); // /Applications/XAMPP/xamppfiles/htdocs/dltphpbatch4/part4/app/config
+// echo dirname(dirname(__FILE__)); // /Applications/XAMPP/xamppfiles/htdocs/dltphpbatch4/part4/app
 define('APPURL', dirname(dirname(__FILE__)));
 
-// Database Access 
+// DB Access
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'phpdbsix');
 
-
-
-
-?>
+echo "config file is working";

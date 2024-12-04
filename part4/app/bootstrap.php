@@ -1,20 +1,18 @@
 <?php
 
-	// Config
-	require_once "config/config.php";
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
-	// Libraries (Manual)
-	// require_once "libraries/SystemController.php";
-	// require_once "libraries/SystemCore.php";
-	// require_once "libraries/SystemDatabase.php";
+// Config
+require_once "config/config.php";
 
-	// Libraries (Autoload)
-	spl_autoload_register(function($classname){
-		require_once ('libraries/'.$classname.'.php');
-	});
+// Libraries    (Manual)
+// require_once "libraries/SystemController.php";
+// require_once "libraries/SystemCore.php";
+// require_once "libraries/SystemDatabase.php";
 
-
-
-
-
-?>
+// Librarires (Autoload)
+spl_autoload_register(function ($class) {
+    require_once "libraries/" . $class . ".php";
+});
