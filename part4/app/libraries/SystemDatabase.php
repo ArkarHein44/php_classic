@@ -17,7 +17,7 @@ class SystemDatabase
 
     public function __construct()
     {
-        echo "I am System Database";
+        // echo "I am System Database";
 
         // Set DSN (Data Source Name)
         $options = [
