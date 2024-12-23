@@ -1,48 +1,67 @@
 <?php
 
-require_once "../libraries/SystemController.php";
+class ArticlesController extends SystemController
+{
+    public $mainmodel;
 
-class ArticlesController extends SystemController{
-    private $mainmodal;
-    public function __construct(){
-        // echo "I am ArticlesController";
+    public function __construct()
+    {
+        // echo "i am Articlescontroller";
+        
+
+        if(isset($_SESSION['user_id'])){
+            redirect('users/login');
+        }
+
+        if(!authcheck()){
+            redirect('users/login');
+        }else{
+            $this->mainmodel =  $this->model('Article');
+        }
     }
 
-    public function index(){
-        // echo "I am Article Index Page";
+    public function index()
+    {
+        // echo "I am articles index page";
+        
 
-        $datas = [
-            "greeting"=>"Have a day Sir!";
-            "caption"=>"";
-            // 'article'=>'article';
+        // return $this->view('articles/index');
+
+        // return $this->view('articles/index', ['greeting' => 'Hello Sir!']);
+
+        // $datas = [
+        //     "greeting" => "Have a day Sir!"
+        // ];
+
+        // return $this->view('articles/index', $datas);
+
+        $articles = $this->mainmodel->getarticles();
+
+        $datas = [  
+            "articles" => $articles
         ];
 
-        return $this->view('articles/index');
+        return $this->view('articles/index',$datas);
+
     }
 
-    public function create($id){
-        echo "I am Article create Page = ID id $id <br/>";
+    public function create() {}
+
+    public function show($id) {
+        echo "I am Article Show Page = ID is $id <br/>";
     }
 
-    public function show($id){
-        echo "I am Article Show Page = ID id $id <br/>";
+    public function edit($id) {
+        echo "I am Article Edit Page = ID is $id <br/>";
     }
 
-    public function edit($id){
-        echo "I am Article Edit Page = ID id $id <br/>";
+    public function update($id) {
+        echo "I am Article Update Page = ID is $id <br/>";
     }
 
-    public function update($id){
-        echo "I am Article Update Page = ID id $id <br/>";
+    public function destroy($id) {
+        echo "I am Article Destory Page = ID is $id <br/>";
     }
-
-    public function destory($id){
-        echo "I am Article Destory Page = ID id $id <br/>";
-    }
-
-
 }
 
-new ArticlesController();
-
-?>
+// new ArticlesController();

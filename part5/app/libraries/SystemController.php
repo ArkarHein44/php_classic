@@ -4,7 +4,7 @@ class SystemController
 {
     public function view($blade, $datas = [])
     {
-        echo "I am View from libraries > Controller";
+        // echo "I am View from libraries > Controller";
 
         // $this->view('articles/index');
         if (file_exists('../app/views/' . $blade . '.php')) {
@@ -17,7 +17,7 @@ class SystemController
 
     public function model($model)
     {
-        echo "I am Model from libraries > Controller";
+        // echo "I am Model from libraries > Controller";
 
         // $this->model('Article');
         if (file_exists('../app/models/' . $model . '.php')) {

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // => Auth Check (check user login or not)
@@ -11,21 +12,22 @@ function authcheck(){
     }
 }
 
-// => Auth Check by dyn key
+// => Auth Check by dynamic key
+
 function authdyncheck($key = "user_id"){
+    // return $_SESSION[$key];
+    // return isset($_SESSION[$key]) ? $_SESSION[$key] : false;  // to check zz 
     return isset($_SESSION[$key]);
-    
 }
 
-// =>logout
+
+// => Logout 
+
 function logout(){
     session_unset();
     session_destroy();
+    // redirect('auth/login.php');
 }
-
-
-
-
 
 
 ?>

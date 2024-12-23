@@ -1,17 +1,10 @@
 <?php
 
 function redirect($page){
-    
-    $redirecturl = ROOTURL.'/'.$page;
-    header("location:".$redirecturl);
-
+    $redirecturl = ROOTURL . '/' . $page;
+    header('Location: ' . $redirecturl);
 }
-
-
-
-
 
 ?>
 
-
-<!-- redirect("auth/login"); -->
+<!-- redirect("auth/login.php");  line 4 -->

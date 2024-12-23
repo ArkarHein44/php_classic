@@ -34,24 +34,27 @@ show defined as Method
 
 ----------------------------------------------------------------
 
-// http://localhost/dltphpbatch4/part4/index.php?name=susu
-// http://localhost/dltphpbatch4/part4/index.php?name=yuyu&gender=female&age=30
-// http://localhost/dltphpbatch4/part4/articles/show/5
+
+// http://localhost/phpbatch4/part4/index.php/name=susu
+// http://localhost/phpbatch4/part4/index.php/name=yuyu&gender=female&age=30
+// http://localhost/phpbatch4/part4/articles/show/5
 // echo $_SERVER['QUERY_STRING'];
 
 // echo $_GET['url'];
 
 
-=> For Linux
-sudo service apache2 stop
+=>For Linux
 sudo service apache2 start
+sudo service apache2 stop
 sudo service apache2 restart
+sudo service apache2 reload (refresh)
 
-==> For Linux ( Apache Edit for rewrite)
-sudo a2ennmod rewrite
+=>For Linux (Apache Edit for rewrite)
+sudo a2enmod rewrite
 sudo nano /etc/apache2/sites-enabled/000-default.conf
 
-=add these lines to the end
+=>add these linese at the end
 <Directory /var/www/html>
     AllowOverride All
 </Directory>
+

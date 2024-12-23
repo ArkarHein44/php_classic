@@ -1,82 +1,91 @@
-<?php
+<?php 
 
-class SystemCore
-{
+class SystemCore{
 
     protected $curcontroller = "ArticlesController";
-    protected $curmethod = 'index';
+    protected $curmethod = "index";
     protected $params = [];
 
-    public  function __construct()
+    public function __construct()
     {
-        // echo "I am SystemCore";
+        // echo "i am system core <br/>";
 
         $url = $this->getroute();
-
         // echo "<pre>".print_r($url,true)."</pre>";
 
-        // => Get Parameter by first value
+        // => Get Classname by first value
         $classurl = ucwords($url[0]);
-        // echo "<pre>".print_r($url,true)."</pre>";
-        
-        if(file_exists("../app/controllers".$classurl."Controller.php")){
+        // echo "$classurl <br/>";
+
+        if(file_exists("../app/controllers/".$classurl."Controller.php")){
             // echo "Controller Exists. <br/>";
-            $this->curcontroller = $classurl."Controller.php";
+            $this->curcontroller = $classurl."Controller";
 
             // echo "<pre>".print_r($url,true)."</pre>";
-            unset($url[0]); // unset index 0 after used for as classname
+            unset($url[0]); // unset index 0 after used for a classname
             // echo "<pre>".print_r($url,true)."</pre>";
+        
         }else{
             echo "Controller Doesn't Exists. <br/>";
         }
-        
-        // echo $this->curcontroller;
 
-        // => Required Controller 
-        require_once("../app/controllers".$classurl."Controller.php");
+            // echo $this->curcontroller . "<br/>"; // ArticleController
 
-        // => Instantiate Controller Class 
-        $this->curcontrollr = new $this->curcontroller;   
+            // => Require Controller
+            require_once("../app/controllers/".$classurl."Controller.php");
+            // => Instantiate Controler Class
+            $this->curcontroller = new $this->curcontroller;
 
-        // => Get Parameter by second value
+
+        // => Get Method by second value
         if(isset($url[1])){
+
             if(method_exists($this->curcontroller,$url[1])){
+                    // echo "Method Exists. <br/>";
+
                 $this->curmethod = $url[1];
 
-                unset($url[1]);S // unset index 0 after used for as classname
-                // echo"<pre>".print_r($url,true)."</pre>";
+                    // echo "<pre>".print_r($url,true)."</pre>";
+                unset($url[1]);
+                    // echo "<pre>".print_r($url,true)."</pre>";
 
             }else{
-                echo "Method Doesn't Exists <br/>";
+                echo "Method Doesn't Exists. <br/>";
             }
+
         }
-        
-        // echo $this->curmethod; // show method?
-        
+
+        // echo $this->curmethod . "<br/>"; // show method
+
+
         // => Get Parameter by third value
         $this->params = $url ? array_values($url) : [] ; // reset index number 2 to 0
+            // echo "<pre>".print_r($this->params,true)."</pre>";
 
-        // call_user_fanc_array[class,method,[argument]]
-        call_user_fanc_array([$this->curcontroller,$this->curmetod, $this->params]);
+        call_user_func_array([$this->curcontroller,$this->curmethod],$this->params);
+
 
     }
 
-    public function getroute()
-    {
-        // echo "i am getroute <br/>";
+    public function getroute(){
+        // echo "i am geturl <br/>";
+        // http://localhost/phpbatch4/part4/articles/show/12
+
 
         // $url = "I am get route";
-        // $url = $_GET['url'];
+        // $url = $_GET['url']; // articles/show/12
 
-        $url = isset($_GET['url']) ? rtrim($_GET['url'], "/") : '';
+        $url = isset($_GET['url']) ? rtrim($_GET['url']) : ''; // articles/show/12
 
-        // filter_var(string,filter) for remove charref as cr
-        $url = filter_var($url, FILTER_SANITIZE_URL);
+        // filter_var(string,filter) for remove charref as 
+        $url = filter_var($url,FILTER_SANITIZE_URL);
 
-        $url = explode('/', $url);
+        $url = explode('/',$url);
 
         return $url;
+
     }
+
 }
 
-// new SystemCore();
+?>
