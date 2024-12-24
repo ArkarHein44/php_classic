@@ -13,7 +13,7 @@
     require_once "helpers/sessionconfig.php";
     require_once "helpers/flashmessage.php";
     require_once "helpers/redirect.php";
-    
+    require_once "helpers/textfilter.php";
 
 
     // Libraries (Autoload)

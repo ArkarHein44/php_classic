@@ -42,4 +42,22 @@ class Article{
             return false;
         }
     }
+
+
+    
+    public function checkuniqueemail($email){
+
+        $this->db->dbquery("SELECT * FROM users WHERE email=:email");
+        $this->db->dbbind(":email", $email);
+
+        $row = $this->db->getsingledataassoc();
+
+        $hashedpassword = $row['password'];
+
+        if($this->db){
+            return $row;
+        }else{
+            return false;
+        }
+    }
 }
